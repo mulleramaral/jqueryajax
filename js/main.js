@@ -1,14 +1,21 @@
 $(function () {
     $('#AjaxRequest').submit(function(){
+
+        var formArray = $(this).serializeArray();
+
         var request;
         request = $.ajax({
             method: "POST",
             url: "post.php",
-            data:{
-                nome: $(':input[name=nome]').val(),
-                email: $(':input[name=email]').val(),
-                telefone: $(':input[name=telefone]').val()
-            }
+            data:formArray
+        });
+
+        request.done(function(e){
+            console.log(e);
+        });
+
+        request.fail(function(e){
+           console.log(e);
         });
 
         request.always(function(e){
